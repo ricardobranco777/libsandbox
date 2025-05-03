@@ -1,0 +1,32 @@
+
+Enable sandbox via shared-library hijacking.
+
+This does the opposite of [unsandbox](https://github.com/ricardobranco777/unsandbox)
+
+Supported sandboxes:
+  - FreeBSD [capsicum](https://man.freebsd.org/cgi/man.cgi?query=capsicum&sektion=4)
+  - OpenBSD [pledge](https://man.openbsd.org/pledge)
+  - Illumos [privileges](https://illumos.org/man/7/privileges)
+  - Linux
+    - [prctl](https://man7.org/linux/man-pages/man2/PR_SET_NO_NEW_PRIVS.2const.html)
+    - [seccomp](https://man7.org/linux/man-pages/man2/seccomp.2.html)
+
+## Usage
+
+```
+make
+SYSTEM=$(uname -s)
+LD_PRELOAD=$PWD/$SYSTEM/libsandbox.so program [options] [arguments]
+```
+
+See **ld.so**(8) manpage for alternatives to `LD_PRELOAD`
+
+## Notes
+
+This repository is highly experimental and the sandbox for now is the most restrictive.
+
+## BUGS / Limitations
+  - Doesn't support statically compiled binaries
+  - Doesn't support setuid/setgid binaries
+  - Doesn't work on HardenedBSD unless the `hardening.harden_rtld` sysctl is set to zero
+  - Illumos still use some 32-bits binaries in userland and you may get `wrong ELF class: ELFCLASS64`

@@ -1,0 +1,16 @@
+**/*.o
+**/*.bco
+**/*.llo
+**/lib*.bc
+**/lib*.ll
+**/*.pico
+**/*.so.full
+**/*.so.debug
+**/lib*.a
+**/*.so
+**/*.d
+**/test
+**/lib*.so.0.0
+**/.depend
+**/a.out
+**/ktrace.out
