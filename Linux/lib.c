@@ -32,6 +32,9 @@ landlock(void)
 void
 sandbox0(void)
 {
+	if (prctl(PR_SET_DUMPABLE, 0L) == -1)
+		warn("%s", "prctl: PR_SET_DUMPABLE");
+
 	if (prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0) == -1)
 		warn("%s", "prctl: PR_SET_NO_NEW_PRIVS");
 
